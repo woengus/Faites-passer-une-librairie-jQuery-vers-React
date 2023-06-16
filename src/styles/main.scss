@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-   	text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.55);
+   	
     background-color: rgba($color: #0ebb87, $alpha: 1.0);
     width: 100%;
     border-radius: 10px;
@@ -14,15 +14,13 @@
     border-radius: 10px;
     padding-bottom: 1rem;
 }
-h2, h1 {
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.75);
-}
+
 a {
     font-size: 20px;
     margin-top: 1rem;
 }
 form {
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.75);
+    font-weight: bold;
     font-size: 20px;
 }
 .container {
@@ -47,7 +45,6 @@ body {
 }
 input, select {
     border-radius: 5px;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.75);
     font-size: 18px;
 }
 button {
