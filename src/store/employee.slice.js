@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   employees: [
-    // Élément 1
     {
       firstName: "Emily",
       lastName: "Brown",
@@ -15,7 +14,6 @@ const initialState = {
       department: "Human Resources",
       id: 26,
     },
-    // Élément 2
     {
       firstName: "Michael",
       lastName: "Wilson",
@@ -28,7 +26,6 @@ const initialState = {
       department: "Engineering",
       id: 27,
     },
-    // Élément 3
     {
       firstName: "Sophia",
       lastName: "Jones",
@@ -41,7 +38,6 @@ const initialState = {
       department: "Operations",
       id: 28,
     },
-    // Élément 4
     {
       firstName: "Daniel",
       lastName: "Taylor",
@@ -54,7 +50,6 @@ const initialState = {
       department: "Sales",
       id: 29,
     },
-    // Élément 5
     {
       firstName: "Olivia",
       lastName: "Thomas",
@@ -67,7 +62,66 @@ const initialState = {
       department: "Marketing",
       id: 30,
     },
-    // ... les 20 éléments restants ...
+    {
+      firstName: "William",
+      lastName: "James",
+      dateOfBirth: "1984-04-01",
+      startDate: "2022-04-02",
+      street: "Park Avenue",
+      city: "Los Angeles",
+      state: "AL",
+      zipCode: "88000",
+      department: "Marketing",
+      id: 31,
+    },
+    {
+      firstName: "Emily",
+      lastName: "Brown",
+      dateOfBirth: "1991-08-27",
+      startDate: "2022-02-15",
+      street: "987 Pine Street",
+      city: "Seattle",
+      state: "WA",
+      zipCode: "98101",
+      department: "Human Resources",
+      id: 32,
+    },
+    {
+      firstName: "Michael",
+      lastName: "Johnson",
+      dateOfBirth: "1985-04-12",
+      startDate: "2021-09-01",
+      street: "123 Oak Avenue",
+      city: "Los Angeles",
+      state: "CA",
+      zipCode: "90001",
+      department: "Engineering",
+      id: 33,
+    },
+    {
+      firstName: "Sophia",
+      lastName: "Smith",
+      dateOfBirth: "1993-11-15",
+      startDate: "2022-06-10",
+      street: "789 Maple Street",
+      city: "Chicago",
+      state: "IL",
+      zipCode: "60601",
+      department: "Marketing",
+      id: 34,
+    },
+    {
+      firstName: "Olivia",
+      lastName: "Wilson",
+      dateOfBirth: "1990-12-03",
+      startDate: "2022-05-20",
+      street: "456 Elm Street",
+      city: "New York",
+      state: "NY",
+      zipCode: "10001",
+      department: "Sales",
+      id: 35,
+    },
   ],
 };
 
