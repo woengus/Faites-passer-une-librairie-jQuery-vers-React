@@ -1,14 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import List from "./pages/List";
+import Curentemployee from "./pages/Curentemployee";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {console.log("toto")}
         <Route path="/" element={<Home />} />
-        <Route path="/list" element={<List />} />
+        <Route path="/Curentemployee" element={<Curentemployee />} />
       </Routes>
     </BrowserRouter>
   );

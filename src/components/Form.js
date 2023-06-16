@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios"; // Pour effectuer des requêtes HTTP
+import { useDispatch } from "react-redux"; // Pour dispatcher les actions
+import { addEmployee } from "../store/employee.slice"; // Pour ajouter un employé
+import { NavLink } from "react-router-dom";
 
-const Home = () => {
+const Form = () => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -10,6 +15,7 @@ const Home = () => {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [department, setDepartment] = useState("Sales");
+  const [employeeCreated, setEmployeeCreated] = useState(false);
 
   const states = [
     {
@@ -253,16 +259,21 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Logique pour enregistrer l'employé ici
-    console.log("Prénom:", firstName);
-    console.log("Nom de famille:", lastName);
-    console.log("Date de naissance:", dateOfBirth);
-    console.log("Date de début:", startDate);
-    console.log("Rue:", street);
-    console.log("Ville:", city);
-    console.log("État:", state);
-    console.log("Code postal:", zipCode);
-    console.log("Département:", department);
+    // Créer un objet représentant les informations de l'employé
+    const employee = {
+      firstName,
+      lastName,
+      dateOfBirth,
+      startDate,
+      street,
+      city,
+      state,
+      zipCode,
+      department,
+    };
+
+    // Ajoute l'employé au tableau des employés
+    dispatch(addEmployee({ employee: { ...employee, id: Date.now() } }));
 
     // Réinitialiser les champs du formulaire
     setFirstName("");
@@ -274,6 +285,18 @@ const Home = () => {
     setState("");
     setZipCode("");
     setDepartment("Sales");
+
+    // Marquer l'employé comme créé
+    setEmployeeCreated(true);
+    console.log(employee);
+
+    // Enregistre les employés dans un fichier JSON distinct
+    //try {
+    //  axios.post("../employees.json", employees);
+    //  console.log("Employés enregistrés avec succès !");
+    // } catch (error) {
+    //  console.error("Erreur lors de l'enregistrement des employés :", error);
+    // }
   };
 
   return (
@@ -282,7 +305,7 @@ const Home = () => {
         <h1>HRnet</h1>
       </div>
       <div className="container">
-        <a href="list">View Current Employees</a>
+        <NavLink to="/Curentemployee">View Current Employees</NavLink>
         <h2>Create Employee</h2>
         <form onSubmit={handleSubmit} id="create-employee">
           <label htmlFor="first-name">First Name</label>
@@ -393,4 +416,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Form;
