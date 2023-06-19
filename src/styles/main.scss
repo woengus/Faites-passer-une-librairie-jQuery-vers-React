@@ -52,5 +52,11 @@ button {
     font-size: 20px;
 }
 table, th, td {
-    border: 1px solid;
+    border: 2px solid;
+    td {
+        background-color: aquamarine;
+    }
+    th {
+        background-color: #37ddab;
+    }
   }

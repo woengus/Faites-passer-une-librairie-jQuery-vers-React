@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"; // Pour dispatcher les actions
 import { addEmployee } from "../store/employee.slice"; // Pour ajouter un employé
 import { NavLink } from "react-router-dom";
 import Modal from "./Modal";
+import DatePicker from "./DatePicker";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -255,6 +256,13 @@ const Form = () => {
       abbreviation: "WY",
     },
   ];
+  const handleDateOfBirthChange = (date) => {
+    setDateOfBirth(date);
+  };
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -278,8 +286,8 @@ const Form = () => {
     // Réinitialiser les champs du formulaire
     setFirstName("");
     setLastName("");
-    setDateOfBirth("");
-    setStartDate("");
+    setDateOfBirth(null);
+    setStartDate(null);
     setStreet("");
     setCity("");
     setState("");
@@ -319,20 +327,22 @@ const Form = () => {
           />
 
           <label htmlFor="date-of-birth">Date of Birth</label>
-          <input
+          <DatePicker
             id="date-of-birth"
-            type="text"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            selected={dateOfBirth}
+            onChange={(e) => handleDateOfBirthChange(e.target.value)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select a date"
             required
           />
 
           <label htmlFor="start-date">Start Date</label>
-          <input
+          <DatePicker
             id="start-date"
-            type="text"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            selected={startDate}
+            onChange={(e) => handleStartDateChange(e.target.value)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select a date"
             required
           />
 

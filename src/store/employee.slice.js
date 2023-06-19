@@ -122,6 +122,18 @@ const initialState = {
       department: "Sales",
       id: 35,
     },
+    {
+      firstName: "John",
+      lastName: "Watson",
+      dateOfBirth: "1992-12-03",
+      startDate: "2021-07-20",
+      street: "50 Washingtown Street",
+      city: "New York",
+      state: "NY",
+      zipCode: "10001",
+      department: "Marketing",
+      id: 36,
+    },
   ],
 };
 
