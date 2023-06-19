@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios"; // Pour effectuer des requêtes HTTP
 import { useDispatch } from "react-redux"; // Pour dispatcher les actions
 import { addEmployee } from "../store/employee.slice"; // Pour ajouter un employé
 import { NavLink } from "react-router-dom";
+import Modal from "./Modal";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -289,14 +289,6 @@ const Form = () => {
     // Marquer l'employé comme créé
     setEmployeeCreated(true);
     console.log(employee);
-
-    // Enregistre les employés dans un fichier JSON distinct
-    //try {
-    //  axios.post("../employees.json", employees);
-    //  console.log("Employés enregistrés avec succès !");
-    // } catch (error) {
-    //  console.error("Erreur lors de l'enregistrement des employés :", error);
-    // }
   };
 
   return (
@@ -405,13 +397,10 @@ const Form = () => {
             <option value="Human Resources">Human Resources</option>
             <option value="Legal">Legal</option>
           </select>
-
-          <button type="submit">Save</button>
+          <Modal />
         </form>
       </div>
-      <div id="confirmation" className="modal">
-        Employee Created!
-      </div>
+      <div id="confirmation" className="modal"></div>
     </div>
   );
 };
