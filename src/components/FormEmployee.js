@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux"; // Pour dispatcher les actions
 import { addEmployee } from "../store/employee.slice"; // Pour ajouter un employé
 import { NavLink } from "react-router-dom";
 import Modal from "./Modal";
-import DatePicker from "./DatePicker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-const Form = () => {
+const FormEmployee = () => {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,8 +17,10 @@ const Form = () => {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [department, setDepartment] = useState("Sales");
-  const [employeeCreated, setEmployeeCreated] = useState(false);
-
+  //const [employeeCreated, setEmployeeCreated] = useState(false);
+  // Pour le date picker
+  const [dateBirth, setDateBirth] = useState(null);
+  const [dateStart, setDateStart] = useState(null);
   const states = [
     {
       name: "Alabama",
@@ -256,19 +259,39 @@ const Form = () => {
       abbreviation: "WY",
     },
   ];
-  const handleDateOfBirthChange = (date) => {
-    setDateOfBirth(date);
+
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  /**
+   * Ouvre ou ferme la superposition modale.
+   */
+  const handleModal = () => {
+    setIsModalOpen(false);
   };
 
-  const handleStartDateChange = (date) => {
+  const formaterDate = (date) => {
+    const mois = String(date.getMonth() + 1).padStart(2, "0"); // Ajoute un zéro devant si nécessaire
+    const jour = String(date.getDate()).padStart(2, "0"); // Ajoute un zéro devant si nécessaire
+    const annee = String(date.getFullYear());
+
+    return `${annee}/${mois}/${jour}`;
+  };
+
+  const handleDateOfBirthChange = (valueDate) => {
+    const date = formaterDate(new Date(valueDate));
+    setDateOfBirth(date);
+    setDateBirth(valueDate);
+  };
+
+  const handleStartDateChange = (valueDate) => {
+    const date = formaterDate(new Date(valueDate));
     setStartDate(date);
+    setDateStart(valueDate);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Créer un objet représentant les informations de l'employé
-    const employee = {
+    console.log({
       firstName,
       lastName,
       dateOfBirth,
@@ -278,25 +301,51 @@ const Form = () => {
       state,
       zipCode,
       department,
-    };
+    });
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      dateOfBirth === null ||
+      startDate === null ||
+      street === "" ||
+      city === "" ||
+      state === "" ||
+      zipCode === "" ||
+      department === ""
+    ) {
+      alert("Please fill in all fields");
+      return;
+    } else {
+      // Créer un objet représentant les informations de l'employé
+      const employee = {
+        firstName,
+        lastName,
+        dateOfBirth,
+        startDate,
+        street,
+        city,
+        state,
+        zipCode,
+        department,
+      };
 
-    // Ajoute l'employé au tableau des employés
-    dispatch(addEmployee({ employee: { ...employee, id: Date.now() } }));
+      // Ajoute l'employé au tableau des employés
+      dispatch(addEmployee({ employee: { ...employee, id: Date.now() } }));
+      setIsModalOpen(true);
+      //setEmployeeCreated(true);
+      // Réinitialiser les champs du formulaire
+      setFirstName("");
+      setLastName("");
+      setDateOfBirth(null);
+      setStartDate(null);
+      setStreet("");
+      setCity("");
+      setState("");
+      setZipCode("");
+      setDepartment("Sales");
 
-    // Réinitialiser les champs du formulaire
-    setFirstName("");
-    setLastName("");
-    setDateOfBirth(null);
-    setStartDate(null);
-    setStreet("");
-    setCity("");
-    setState("");
-    setZipCode("");
-    setDepartment("Sales");
-
-    // Marquer l'employé comme créé
-    setEmployeeCreated(true);
-    console.log(employee);
+      console.log(employee);
+    }
   };
 
   return (
@@ -329,9 +378,8 @@ const Form = () => {
           <label htmlFor="date-of-birth">Date of Birth</label>
           <DatePicker
             id="date-of-birth"
-            selected={dateOfBirth}
-            onChange={(e) => handleDateOfBirthChange(e.target.value)}
-            dateFormat="yyyy-MM-dd"
+            selected={dateBirth}
+            onChange={(date) => handleDateOfBirthChange(date)}
             placeholderText="Select a date"
             required
           />
@@ -339,9 +387,8 @@ const Form = () => {
           <label htmlFor="start-date">Start Date</label>
           <DatePicker
             id="start-date"
-            selected={startDate}
-            onChange={(e) => handleStartDateChange(e.target.value)}
-            dateFormat="yyyy-MM-dd"
+            selected={dateStart}
+            onChange={(date) => handleStartDateChange(date)}
             placeholderText="Select a date"
             required
           />
@@ -407,12 +454,13 @@ const Form = () => {
             <option value="Human Resources">Human Resources</option>
             <option value="Legal">Legal</option>
           </select>
-          <Modal />
+          <button type="submit">Save</button>
         </form>
+        <Modal isModalOpen={isModalOpen} closeModal={handleModal} />
       </div>
       <div id="confirmation" className="modal"></div>
     </div>
   );
 };
 
-export default Form;
+export default FormEmployee;

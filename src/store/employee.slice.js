@@ -1,5 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * Initial state of the employees slice.
+ * @typedef {Object} EmployeesState
+ * @property {Array<Object>} employees - An array of employee objects.
+ */
+/**
+ * An employee object.
+ * @typedef {Object} Employee
+ * @property {string} firstName - The first name of the employee.
+ * @property {string} lastName - The last name of the employee.
+ * @property {string} dateOfBirth - The date of birth of the employee (in YYYY-MM-DD format).
+ * @property {string} startDate - The start date of the employee (in YYYY-MM-DD format).
+ * @property {string} street - The street address of the employee.
+ * @property {string} city - The city of the employee.
+ * @property {string} state - The state of the employee.
+ * @property {string} zipCode - The ZIP code of the employee.
+ * @property {string} department - The department of the employee.
+ * @property {number} id - The unique identifier of the employee.
+ */
+/**
+ * The initial state of the employees slice.
+ * @type {EmployeesState}
+ */
 const initialState = {
   employees: [
     {
@@ -785,12 +808,17 @@ const initialState = {
   ],
 };
 
+/**
+ * The Redux slice for managing employees.
+ * @type {import("@reduxjs/toolkit").Slice}
+ */
 export const employeeSlice = createSlice({
   //createSlice
   //A function that accepts an initial state, an object of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
   name: "employee",
   initialState,
   reducers: {
+    // Redux reducer functions for managing employees
     addEmployee(state, { payload }) {
       state.employees.push(payload.employee);
     },

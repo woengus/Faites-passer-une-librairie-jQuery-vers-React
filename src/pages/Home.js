@@ -1,8 +1,8 @@
-import Form from "../components/Form";
+import FormEmployee from "../components/FormEmployee";
 const Home = () => {
   return (
     <div>
-      <Form />
+      <FormEmployee />
     </div>
   );
 };
