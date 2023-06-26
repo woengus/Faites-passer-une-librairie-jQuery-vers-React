@@ -60,3 +60,14 @@ table, th, td {
         background-color: #37ddab;
     }
   }
+  .items-per-page {
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: flex-start;
+    p {
+        margin-left:1rem;
+    }
+    label {
+        margin-right:1rem;
+    }
+  }
