@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import Modal from "./Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Dropdown from "./Dropdown";
 
 const FormEmployee = () => {
   const dispatch = useDispatch();
@@ -274,7 +275,7 @@ const FormEmployee = () => {
     const jour = String(date.getDate()).padStart(2, "0"); // Ajoute un zéro devant si nécessaire
     const annee = String(date.getFullYear());
 
-    return `${annee}/${mois}/${jour}`;
+    return `${annee}-${mois}-${jour}`;
   };
 
   const handleDateOfBirthChange = (valueDate) => {
@@ -415,20 +416,16 @@ const FormEmployee = () => {
             />
 
             <label htmlFor="state">State</label>
-            <select
-              name="state"
-              id="state"
+            <Dropdown
+              label="state"
+              options={states.map((state) => ({
+                value: state.abbreviation,
+                label: state.name,
+              }))}
               value={state}
               onChange={(e) => setState(e.target.value)}
               required
-            >
-              <option value="">Select State</option>
-              {states.map((state) => (
-                <option key={state.abbreviation} value={state.abbreviation}>
-                  {state.name}
-                </option>
-              ))}
-            </select>
+            />
 
             <label htmlFor="zip-code">Zip Code</label>
             <input
