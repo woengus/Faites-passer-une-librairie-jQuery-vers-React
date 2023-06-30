@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortUp, faSortDown } from "@fortawesome/free-solid-svg-icons";
 import Table from "../components/Table";
 import Pagination from "../components/Pagination";
 import EmployeeSearch from "../components/EmployeeSearch";
 
-const Curentemployee = () => {
+const CurrentEmployee = () => {
   const allEmployees = useSelector((state) => state.employee.employees);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10); // Nombre d'employés par page
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPageOptions = [10, 25, 50, 100];
+  const [sortColumn, setSortColumn] = useState(null);
+  const [sortOrder, setSortOrder] = useState(null);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -17,13 +21,10 @@ const Curentemployee = () => {
 
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(parseInt(event.target.value));
-    setCurrentPage(1); // Réinitialiser la page sélectionnée lorsque le nombre d'éléments par page change
+    setCurrentPage(1);
   };
 
   const handleSearch = (term) => {
-    // console.log(term);
-    // setSearchTerm(term);
-    // setCurrentPage(1); // Réinitialiser la page sélectionnée lorsque la recherche change
     const employees = allEmployees.filter((employee) => {
       if (
         employee.firstName.toLowerCase().includes(term.toLowerCase()) ||
@@ -40,7 +41,32 @@ const Curentemployee = () => {
     setFilteredEmployees(employees);
   };
 
-  // Filtrer les employés en fonction du terme de recherche, uniquement lorsque le terme est défini
+  const handleSort = (columnName) => {
+    const order =
+      sortColumn === columnName
+        ? sortOrder === "asc"
+          ? "desc"
+          : "asc"
+        : "asc";
+    setSortColumn(columnName);
+    setSortOrder(order);
+
+    const sortedEmployees = [...filteredEmployees].sort((a, b) => {
+      const valueA = a[columnName].toLowerCase();
+      const valueB = b[columnName].toLowerCase();
+
+      if (valueA < valueB) {
+        return order === "asc" ? -1 : 1;
+      }
+      if (valueA > valueB) {
+        return order === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+
+    setFilteredEmployees(sortedEmployees);
+  };
+
   const [filteredEmployees, setFilteredEmployees] = useState(allEmployees);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -49,6 +75,50 @@ const Curentemployee = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
+
+  const renderArrowIcon = (columnName) => {
+    if (sortColumn !== columnName) {
+      return (
+        <>
+          <div className="arrow-flex">
+            <FontAwesomeIcon icon={faSortUp} />
+            <FontAwesomeIcon icon={faSortDown} />
+          </div>
+        </>
+      );
+    }
+
+    if (sortOrder === "asc") {
+      return (
+        <>
+          <div className="arrow-flex">
+            <FontAwesomeIcon icon={faSortUp} color="green" />
+            <FontAwesomeIcon icon={faSortDown} />
+          </div>
+        </>
+      );
+    }
+
+    if (sortOrder === "desc") {
+      return (
+        <>
+          <div className="arrow-flex">
+            <FontAwesomeIcon icon={faSortUp} />
+            <FontAwesomeIcon icon={faSortDown} color="green" />
+          </div>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <div className="arrow-flex">
+          <FontAwesomeIcon icon={faSortUp} />
+          <FontAwesomeIcon icon={faSortDown} />
+        </div>
+      </>
+    );
+  };
 
   return (
     <div>
@@ -71,7 +141,54 @@ const Curentemployee = () => {
           </select>
           <p>employees</p>
         </div>
-        <Table employees={currentItems} />
+        <table>
+          <thead>
+            <tr>
+              <th onClick={() => handleSort("firstName")}>
+                FirstName {renderArrowIcon("firstName")}
+              </th>
+              <th onClick={() => handleSort("lastName")}>
+                LastName {renderArrowIcon("lastName")}
+              </th>
+              <th onClick={() => handleSort("startDate")}>
+                Start Date {renderArrowIcon("startDate")}
+              </th>
+              <th onClick={() => handleSort("department")}>
+                Department {renderArrowIcon("department")}
+              </th>
+              <th onClick={() => handleSort("dateOfBirth")}>
+                Date of Birth {renderArrowIcon("dateOfBirth")}
+              </th>
+              <th onClick={() => handleSort("street")}>
+                Street {renderArrowIcon("street")}
+              </th>
+              <th onClick={() => handleSort("city")}>
+                City {renderArrowIcon("city")}
+              </th>
+              <th onClick={() => handleSort("state")}>
+                State {renderArrowIcon("state")}
+              </th>
+              <th onClick={() => handleSort("zipcode")}>
+                Zipcode {renderArrowIcon("zipcode")}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((employee) => (
+              <tr key={employee.id}>
+                <td>{employee.firstName}</td>
+                <td>{employee.lastName}</td>
+                <td>{employee.startDate}</td>
+                <td>{employee.department}</td>
+                <td>{employee.dateOfBirth}</td>
+                <td>{employee.street}</td>
+                <td>{employee.city}</td>
+                <td>{employee.state}</td>
+                <td>{employee.zipCode}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <Pagination
           totalItems={filteredEmployees.length}
           itemsPerPage={itemsPerPage}
@@ -84,4 +201,4 @@ const Curentemployee = () => {
   );
 };
 
-export default Curentemployee;
+export default CurrentEmployee;

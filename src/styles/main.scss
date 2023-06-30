@@ -138,3 +138,8 @@ table, th, td {
         }
     }
   }
+ .arrow-flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+ }
