@@ -820,7 +820,8 @@ export const employeeSlice = createSlice({
   reducers: {
     // Redux reducer functions for managing employees
     addEmployee(state, { payload }) {
-      state.employees.push(payload.employee);
+      console.log("payload", payload);
+      state.employees.push(payload);
     },
   },
 });

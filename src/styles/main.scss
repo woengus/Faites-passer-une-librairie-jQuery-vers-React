@@ -129,3 +129,12 @@ table, th, td {
     font-size: 18px;
     margin-top: 10px;
   }
+
+  .page-item {
+    &.active {
+        button {
+            background-color: #37ddab;
+            color: white;
+        }
+    }
+  }

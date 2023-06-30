@@ -15,7 +15,7 @@ const FormEmployee = () => {
   const [startDate, setStartDate] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [state, setState] = useState("Alabama");
   const [zipCode, setZipCode] = useState("");
   const [department, setDepartment] = useState("Sales");
   //const [employeeCreated, setEmployeeCreated] = useState(false);
@@ -260,7 +260,13 @@ const FormEmployee = () => {
       abbreviation: "WY",
     },
   ];
-
+  const departmentOptions = [
+    { value: "Sales", label: "Sales" },
+    { value: "Marketing", label: "Marketing" },
+    { value: "Engineering", label: "Engineering" },
+    { value: "Human Resources", label: "Human Resources" },
+    { value: "Legal", label: "Legal" },
+  ];
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   /**
@@ -328,10 +334,11 @@ const FormEmployee = () => {
         state,
         zipCode,
         department,
+        id: Date.now(),
       };
 
       // Ajoute l'employé au tableau des employés
-      dispatch(addEmployee({ employee: { ...employee, id: Date.now() } }));
+      dispatch(addEmployee(employee));
       setIsModalOpen(true);
       //setEmployeeCreated(true);
       // Réinitialiser les champs du formulaire
@@ -341,11 +348,9 @@ const FormEmployee = () => {
       setStartDate(null);
       setStreet("");
       setCity("");
-      setState("");
+      setState("Alabama");
       setZipCode("");
       setDepartment("Sales");
-
-      console.log(employee);
     }
   };
 
@@ -415,15 +420,15 @@ const FormEmployee = () => {
               required
             />
 
-            <label htmlFor="State"></label>
+            <label htmlFor="state"></label>
             <Dropdown
-              label="State"
+              label="state"
               options={states.map((state) => ({
-                value: state.abbreviation,
+                value: state.name,
                 label: state.name,
               }))}
               value={state}
-              onChange={(e) => setState(e.target.value)}
+              onSelect={(e) => setState(e.target.value)}
               required
             />
 
@@ -437,20 +442,15 @@ const FormEmployee = () => {
             />
           </fieldset>
 
-          <label htmlFor="department">Department</label>
-          <select
-            name="department"
-            id="department"
+          <label htmlFor="department"></label>
+          <Dropdown
+            label="department"
+            options={departmentOptions}
             value={department}
-            onChange={(e) => setDepartment(e.target.value)}
+            onSelect={(e) => setDepartment(e.target.value)}
             required
-          >
-            <option value="Sales">Sales</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Human Resources">Human Resources</option>
-            <option value="Legal">Legal</option>
-          </select>
+          />
+
           <button type="submit">Save</button>
         </form>
         <Modal isModalOpen={isModalOpen} closeModal={handleModal} />

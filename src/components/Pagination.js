@@ -22,6 +22,18 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
     onPageChange(page);
   };
 
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      handlePageChange(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      handlePageChange(currentPage - 1);
+    }
+  };
+
   /**
    * Rend les numéros de page.
    * @returns {JSX.Element[]} Tableau des éléments JSX représentant les numéros de page.
@@ -47,7 +59,25 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
 
   return (
     <nav>
-      <ul className="pagination">{renderPageNumbers()}</ul>
+      <ul className="pagination">
+        <li>
+          <button
+            onClick={() => handlePreviousPage()}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+        </li>
+        {renderPageNumbers()}
+        <li>
+          <button
+            onClick={() => handleNextPage()}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </li>
+      </ul>
     </nav>
   );
 };

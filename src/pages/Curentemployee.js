@@ -21,18 +21,27 @@ const Curentemployee = () => {
   };
 
   const handleSearch = (term) => {
-    setSearchTerm(term);
-    setCurrentPage(1); // Réinitialiser la page sélectionnée lorsque la recherche change
+    // console.log(term);
+    // setSearchTerm(term);
+    // setCurrentPage(1); // Réinitialiser la page sélectionnée lorsque la recherche change
+    const employees = allEmployees.filter((employee) => {
+      if (
+        employee.firstName.toLowerCase().includes(term.toLowerCase()) ||
+        employee.lastName.toLowerCase().includes(term.toLowerCase()) ||
+        employee.street.toLowerCase().includes(term.toLowerCase()) ||
+        employee.city.toLowerCase().includes(term.toLowerCase()) ||
+        employee.state.toLowerCase().includes(term.toLowerCase()) ||
+        employee.department.toLowerCase().includes(term.toLowerCase())
+      ) {
+        return employee;
+      }
+    });
+
+    setFilteredEmployees(employees);
   };
 
   // Filtrer les employés en fonction du terme de recherche, uniquement lorsque le terme est défini
-  const filteredEmployees = searchTerm
-    ? allEmployees.filter(
-        (employee) =>
-          employee.name &&
-          employee.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : allEmployees;
+  const [filteredEmployees, setFilteredEmployees] = useState(allEmployees);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -45,7 +54,7 @@ const Curentemployee = () => {
     <div>
       <div id="employee-div" className="container">
         <h1>Current Employees</h1>
-        <EmployeeSearch employees={allEmployees} onSearch={handleSearch} />
+        <EmployeeSearch onSearch={handleSearch} />
 
         <div className="items-per-page">
           <label htmlFor="itemsPerPage">Show</label>

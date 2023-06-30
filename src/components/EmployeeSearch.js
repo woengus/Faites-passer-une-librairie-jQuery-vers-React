@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const EmployeeSearch = ({ employees, onSearch }) => {
+const EmployeeSearch = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (event) => {
@@ -10,7 +10,7 @@ const EmployeeSearch = ({ employees, onSearch }) => {
 
   return (
     <div className="employee-search">
-      <label for="search">Search</label>
+      <label htmlFor="search">Search</label>
       <input
         type="text"
         value={searchTerm}
