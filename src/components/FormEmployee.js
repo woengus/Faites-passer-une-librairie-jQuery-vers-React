@@ -415,9 +415,9 @@ const FormEmployee = () => {
               required
             />
 
-            <label htmlFor="state">State</label>
+            <label htmlFor="State"></label>
             <Dropdown
-              label="state"
+              label="State"
               options={states.map((state) => ({
                 value: state.abbreviation,
                 label: state.name,
