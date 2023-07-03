@@ -1,26 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 /**
- * Initial state of the employees slice.
+ * État initial du slice "employees".
  * @typedef {Object} EmployeesState
- * @property {Array<Object>} employees - An array of employee objects.
+ * @property {Array<Object>} employees -  Un tableau d'objets représentant des employés.
  */
+
 /**
  * An employee object.
  * @typedef {Object} Employee
- * @property {string} firstName - The first name of the employee.
- * @property {string} lastName - The last name of the employee.
- * @property {string} dateOfBirth - The date of birth of the employee (in YYYY-MM-DD format).
- * @property {string} startDate - The start date of the employee (in YYYY-MM-DD format).
- * @property {string} street - The street address of the employee.
- * @property {string} city - The city of the employee.
- * @property {string} state - The state of the employee.
- * @property {string} zipCode - The ZIP code of the employee.
- * @property {string} department - The department of the employee.
- * @property {number} id - The unique identifier of the employee.
+ * @property {string} firstName - prénom
+ * @property {string} lastName - nom
+ * @property {string} dateOfBirth - date de naissance (au format YYYY-MM-DD).
+ * @property {string} startDate - date de démarrage (au format YYYY-MM-DD).
+ * @property {string} street - adresse
+ * @property {string} city - ville
+ * @property {string} state - état
+ * @property {string} zipCode - code postal
+ * @property {string} department - departement (dans la boite)
+ * @property {number} id - identifiant unique
  */
 /**
- * The initial state of the employees slice.
+ * État initial du slice "employees".
  * @type {EmployeesState}
  */
 const initialState = {
@@ -809,16 +810,18 @@ const initialState = {
 };
 
 /**
- * The Redux slice for managing employees.
+ * Le Redux slice pour gérer les employés.
  * @type {import("@reduxjs/toolkit").Slice}
  */
 export const employeeSlice = createSlice({
-  //createSlice
-  //A function that accepts an initial state, an object of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
+  /*createSlice
+  Une fonction qui accepte un état initial, un objet de fonctions réductrices, et un "nom de slice",
+  et génère automatiquement des créateurs d'action et des types d'action qui correspondent aux réducteurs et à l'état.
+  */
   name: "employee",
   initialState,
   reducers: {
-    // Redux reducer functions for managing employees
+    // Fonction Redux reducer  pour gérer les employés
     addEmployee(state, { payload }) {
       console.log("payload", payload);
       state.employees.push(payload);

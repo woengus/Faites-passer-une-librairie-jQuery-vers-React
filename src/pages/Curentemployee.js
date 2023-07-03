@@ -15,15 +15,27 @@ const CurrentEmployee = () => {
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState(null);
 
+  /**
+   * Gère le changement de page.
+   * @param {number} page - Le numéro de la page sélectionnée.
+   */
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
+  /**
+   * Gère le changement du nombre d'éléments par page.
+   * @param {object} event - L'événement de changement.
+   */
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(parseInt(event.target.value));
     setCurrentPage(1);
   };
 
+  /**
+   * Gère la recherche d'employés.
+   * @param {string} term - Le terme de recherche saisi.
+   */
   const handleSearch = (term) => {
     const employees = allEmployees.filter((employee) => {
       if (
@@ -41,6 +53,10 @@ const CurrentEmployee = () => {
     setFilteredEmployees(employees);
   };
 
+  /**
+   * Gère le tri des employés en fonction de la colonne spécifiée.
+   * @param {string} columnName - Le nom de la colonne pour le tri.
+   */
   const handleSort = (columnName) => {
     const order =
       sortColumn === columnName
@@ -76,6 +92,11 @@ const CurrentEmployee = () => {
     indexOfLastItem
   );
 
+  /**
+   * Rend l'icône de flèche pour la colonne spécifiée.
+   * @param {string} columnName - Le nom de la colonne.
+   * @returns {JSX.Element} L'élément JSX représentant l'icône de flèche.
+   */
   const renderArrowIcon = (columnName) => {
     if (sortColumn !== columnName) {
       return (

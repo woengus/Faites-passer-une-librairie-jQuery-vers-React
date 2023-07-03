@@ -7,6 +7,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "./Dropdown";
 
+/**
+ * Composant FormEmployee
+ * @returns {JSX.Element} Composant FormEmployee
+ */
 const FormEmployee = () => {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
@@ -261,13 +265,14 @@ const FormEmployee = () => {
     },
   ];
   const departmentOptions = [
+    // Options du département
     { value: "Sales", label: "Sales" },
     { value: "Marketing", label: "Marketing" },
     { value: "Engineering", label: "Engineering" },
     { value: "Human Resources", label: "Human Resources" },
     { value: "Legal", label: "Legal" },
   ];
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(true); // État du modal
 
   /**
    * Ouvre ou ferme la superposition modale.
@@ -283,19 +288,28 @@ const FormEmployee = () => {
 
     return `${annee}-${mois}-${jour}`;
   };
-
+  /**
+   * Gère le changement de la date de naissance
+   * @param {Date} valueDate - Date sélectionnée
+   */
   const handleDateOfBirthChange = (valueDate) => {
     const date = formaterDate(new Date(valueDate));
     setDateOfBirth(date);
     setDateBirth(valueDate);
   };
-
+  /**
+   * Gère le changement de la date de début
+   * @param {Date} valueDate - Date sélectionnée
+   */
   const handleStartDateChange = (valueDate) => {
     const date = formaterDate(new Date(valueDate));
     setStartDate(date);
     setDateStart(valueDate);
   };
-
+  /**
+   * Soumet le formulaire
+   * @param {Object} e - Événement de soumission
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({

@@ -22,12 +22,18 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
     onPageChange(page);
   };
 
+  /**
+   * Gère le passage à la page suivante.
+   */
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       handlePageChange(currentPage + 1);
     }
   };
 
+  /**
+   * Gère le retour à la page précédente.
+   */
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       handlePageChange(currentPage - 1);
@@ -65,7 +71,7 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
             onClick={() => handlePreviousPage()}
             disabled={currentPage === 1}
           >
-            Previous
+            Précédent
           </button>
         </li>
         {renderPageNumbers()}
@@ -74,7 +80,7 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
             onClick={() => handleNextPage()}
             disabled={currentPage === totalPages}
           >
-            Next
+            Suivant
           </button>
         </li>
       </ul>

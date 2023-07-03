@@ -3,13 +3,13 @@
     align-items: center;
     justify-content: center;
    	
-    background-color: rgba($color: #0ebb87, $alpha: 1.0);
+    background-color: rgba($color: #049166, $alpha: 1.0);
     width: 100%;
     border-radius: 10px;
     margin-bottom: 1rem;
 }
 .container {
-    background-color: rgba($color: #0ebb87, $alpha: 1.0);
+    background-color: rgba($color: #049166, $alpha: 1.0);
     width: 100%;
     border-radius: 10px;
     padding-bottom: 1rem;
@@ -143,3 +143,8 @@ table, th, td {
     flex-direction: column;
     flex-wrap: nowrap;
  }
+td , th {
+    padding-left:0.5rem;
+    padding-right:0.5rem;
+    
+}
