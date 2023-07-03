@@ -1,23 +1,47 @@
 import React from "react";
 
-const Table = ({ employees }) => {
+const Table = ({
+  data,
+  sortColumn,
+  sortOrder,
+  handleSort,
+  renderArrowIcon,
+}) => {
   return (
-    <table className="table table-striped">
+    <table>
       <thead>
         <tr>
-          <th scope="col">FirstName</th>
-          <th scope="col">Lastname</th>
-          <th scope="col">Start date</th>
-          <th scope="col">Department</th>
-          <th scope="col">Date of birth</th>
-          <th scope="col">Street</th>
-          <th scope="col">City</th>
-          <th scope="col">State</th>
-          <th scope="col">Zipcode</th>
+          <th onClick={() => handleSort("firstName")}>
+            FirstName {renderArrowIcon("firstName")}
+          </th>
+          <th onClick={() => handleSort("lastName")}>
+            LastName {renderArrowIcon("lastName")}
+          </th>
+          <th onClick={() => handleSort("startDate")}>
+            Start Date {renderArrowIcon("startDate")}
+          </th>
+          <th onClick={() => handleSort("department")}>
+            Department {renderArrowIcon("department")}
+          </th>
+          <th onClick={() => handleSort("dateOfBirth")}>
+            Date of Birth {renderArrowIcon("dateOfBirth")}
+          </th>
+          <th onClick={() => handleSort("street")}>
+            Street {renderArrowIcon("street")}
+          </th>
+          <th onClick={() => handleSort("city")}>
+            City {renderArrowIcon("city")}
+          </th>
+          <th onClick={() => handleSort("state")}>
+            State {renderArrowIcon("state")}
+          </th>
+          <th onClick={() => handleSort("zipCode")}>
+            Zipcode {renderArrowIcon("zipCode")}
+          </th>
         </tr>
       </thead>
       <tbody>
-        {employees.map((employee) => (
+        {data.map((employee) => (
           <tr key={employee.id}>
             <td>{employee.firstName}</td>
             <td>{employee.lastName}</td>
