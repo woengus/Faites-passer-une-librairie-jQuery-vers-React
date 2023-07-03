@@ -68,8 +68,14 @@ const CurrentEmployee = () => {
     setSortOrder(order);
 
     const sortedEmployees = [...filteredEmployees].sort((a, b) => {
-      const valueA = a[columnName].toLowerCase();
-      const valueB = b[columnName].toLowerCase();
+      let valueA = a[columnName] ? a[columnName].toString().toLowerCase() : "";
+      let valueB = b[columnName] ? b[columnName].toString().toLowerCase() : "";
+
+      // Tri spécifique pour la colonne "zipCode"
+      if (columnName === "zipCode") {
+        valueA = valueA.padStart(5, "0");
+        valueB = valueB.padStart(5, "0");
+      }
 
       if (valueA < valueB) {
         return order === "asc" ? -1 : 1;
@@ -189,8 +195,8 @@ const CurrentEmployee = () => {
               <th onClick={() => handleSort("state")}>
                 State {renderArrowIcon("state")}
               </th>
-              <th onClick={() => handleSort("zipcode")}>
-                Zipcode {renderArrowIcon("zipcode")}
+              <th onClick={() => handleSort("zipCode")}>
+                Zipcode {renderArrowIcon("zipCode")}
               </th>
             </tr>
           </thead>
