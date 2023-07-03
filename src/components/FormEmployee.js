@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Pour dispatcher les actions
 import { addEmployee } from "../store/employee.slice"; // Pour ajouter un employé
 import { NavLink } from "react-router-dom";
@@ -367,7 +367,25 @@ const FormEmployee = () => {
       setDepartment("Sales");
     }
   };
-
+  //fix pour un message d'erreur bénin non impactant, comme dit ici: https://stackoverflow.com/questions/49384120/resizeobserver-loop-limit-exceeded/50387233#50387233
+  useEffect(() => {
+    window.addEventListener("error", (e) => {
+      if (e.message === "ResizeObserver loop limit exceeded") {
+        const resizeObserverErrDiv = document.getElementById(
+          "webpack-dev-server-client-overlay-div"
+        );
+        const resizeObserverErr = document.getElementById(
+          "webpack-dev-server-client-overlay"
+        );
+        if (resizeObserverErr) {
+          resizeObserverErr.setAttribute("style", "display: none");
+        }
+        if (resizeObserverErrDiv) {
+          resizeObserverErrDiv.setAttribute("style", "display: none");
+        }
+      }
+    });
+  }, []);
   return (
     <div>
       <div className="title">
