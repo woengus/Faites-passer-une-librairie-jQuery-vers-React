@@ -10,7 +10,6 @@ const CurrentEmployee = () => {
   const allEmployees = useSelector((state) => state.employee.employees);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPageOptions = [10, 25, 50, 100];
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState(null);
@@ -46,7 +45,9 @@ const CurrentEmployee = () => {
         employee.state.toLowerCase().includes(term.toLowerCase()) ||
         employee.department.toLowerCase().includes(term.toLowerCase())
       ) {
-        return employee;
+        return true;
+      } else {
+        return false;
       }
     });
 

@@ -7,13 +7,13 @@ import React from "react";
  * Représente une superposition modale.
  * @returns {JSX.Element} La superposition modale.
  */
-const Modal = ({ isModalOpen, closeModal }) => {
-  const classCss = ["modal-overlay", isModalOpen ? "open-modal" : ""].join(" ");
+const Modal = ({ message, open, toggleModal }) => {
+  const classCss = ["modal-overlay", open ? "open-modal" : ""].join(" ");
   return (
     <div className={classCss}>
       <div className="modal">
-        <p>Employee created !</p>
-        <button onClick={closeModal(false)}>Close</button>
+        <p>{message}</p>
+        <button onClick={() => toggleModal()}>Close</button>
       </div>
     </div>
   );

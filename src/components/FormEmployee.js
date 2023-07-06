@@ -272,14 +272,7 @@ const FormEmployee = () => {
     { value: "Human Resources", label: "Human Resources" },
     { value: "Legal", label: "Legal" },
   ];
-  const [isModalOpen, setIsModalOpen] = useState(true); // État du modal
-
-  /**
-   * Ouvre ou ferme la superposition modale.
-   */
-  const handleModal = () => {
-    setIsModalOpen(false);
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false); // État du modal
 
   const formaterDate = (date) => {
     const mois = String(date.getMonth() + 1).padStart(2, "0"); // Ajoute un zéro devant si nécessaire
@@ -485,7 +478,11 @@ const FormEmployee = () => {
 
           <button type="submit">Save</button>
         </form>
-        <Modal isModalOpen={isModalOpen} closeModal={handleModal} />
+        <Modal
+          open={isModalOpen}
+          message="Employee created !"
+          toggleModal={() => setIsModalOpen(false)}
+        />
       </div>
       <div id="confirmation" className="modal"></div>
     </div>
