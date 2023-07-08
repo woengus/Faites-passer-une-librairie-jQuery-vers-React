@@ -484,7 +484,6 @@ const FormEmployee = () => {
           toggleModal={() => setIsModalOpen(false)}
         />
       </div>
-      <div id="confirmation" className="modal"></div>
     </div>
   );
 };
